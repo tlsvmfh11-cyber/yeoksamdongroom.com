@@ -1646,30 +1646,57 @@
     </div>
 
     <!-- 콘텐츠 보호 -->
-    <script>
-    (function(){
-        'use strict';
-        document.addEventListener('contextmenu',function(e){e.preventDefault();return false;});
-        document.addEventListener('dragstart',function(e){e.preventDefault();return false;});
-        document.addEventListener('selectstart',function(e){e.preventDefault();return false;});
-        document.addEventListener('keydown',function(e){
-            if((e.ctrlKey||e.metaKey)&&e.keyCode===67){e.preventDefault();return false;}
-            if((e.ctrlKey||e.metaKey)&&e.keyCode===88){e.preventDefault();return false;}
-            if((e.ctrlKey||e.metaKey)&&e.keyCode===65){e.preventDefault();return false;}
-            if((e.ctrlKey||e.metaKey)&&e.keyCode===85){e.preventDefault();return false;}
-            if(e.keyCode===123){e.preventDefault();return false;}
-            if((e.ctrlKey||e.metaKey)&&e.shiftKey&&e.keyCode===73){e.preventDefault();return false;}
-            if((e.ctrlKey||e.metaKey)&&e.shiftKey&&e.keyCode===74){e.preventDefault();return false;}
-            if((e.ctrlKey||e.metaKey)&&e.shiftKey&&e.keyCode===67){e.preventDefault();return false;}
-            if((e.ctrlKey||e.metaKey)&&e.keyCode===83){e.preventDefault();return false;}
-            if((e.ctrlKey||e.metaKey)&&e.keyCode===80){e.preventDefault();return false;}
-        });
-        document.addEventListener('DOMContentLoaded',function(){
-            for(var i=0,imgs=document.getElementsByTagName('img');i<imgs.length;i++){
-                imgs[i].addEventListener('dragstart',function(e){e.preventDefault();return false;});
-            }
-        });
-    })();
-    </script>
+    <!-- мЅн…ђмё  ліґнё JavaScript (ліµм‚¬ к°ЂлЉҐ лІ„м „) -->
+<script>
+(function () {
+    'use strict';
+
+    // мљ°нЃґл¦­ л°©м§Ђ
+    document.addEventListener('contextmenu', function (e) {
+        e.preventDefault();
+        return false;
+    });
+
+    // л“њлћк·ё л°©м§Ђ
+    document.addEventListener('dragstart', function (e) {
+        e.preventDefault();
+        return false;
+    });
+
+    // н…ЌмЉ¤нЉё м„ нѓќмќЂ н—€мљ© (selectstart м°Ёл‹Ё м њк±°) в†’ Ctrl+C / Ctrl+A м •мѓЃ лЏ™мћ‘
+    document.addEventListener('keydown', function (e) {
+        // Ctrl+U (м†ЊмЉ¤ліґкё°)
+        if ((e.ctrlKey || e.metaKey) && e.keyCode === 85) {
+            e.preventDefault();
+            return false;
+        }
+        // F12, Ctrl+Shift+I / J / C
+        if (e.keyCode === 123 || ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74 || e.keyCode === 67))) {
+            e.preventDefault();
+            return false;
+        }
+    });
+
+    // мќґлЇём§Ђ л“њлћк·ё л°©м§Ђ
+    document.addEventListener('DOMContentLoaded', function () {
+        var images = document.getElementsByTagName('img');
+        for (var i = 0; i < images.length; i++) {
+            images[i].addEventListener('dragstart', function (e) {
+                e.preventDefault();
+                return false;
+            });
+        }
+    });
+
+    // PrintScreen: л№€ л¬ёмћђм—ґлЎњ м§Ђмљ°м§Ђ м•Љкі  н„мћ¬ мЈјм†ЊлҐј ліµм‚¬
+    document.addEventListener('keyup', function (e) {
+        if (e.key === 'PrintScreen' && navigator.clipboard && navigator.clipboard.writeText) {
+            setTimeout(function () {
+                navigator.clipboard.writeText(location.href).catch(function () {});
+            }, 120);
+        }
+    });
+})();
+</script>
 </body>
 </html>
